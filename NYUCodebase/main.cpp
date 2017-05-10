@@ -26,7 +26,7 @@
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
-#include <Windows.h>
+//#include <Windows.h>
 
 using namespace std;
 
@@ -45,6 +45,7 @@ Matrix projectionMatrix;
 int mapHeight;
 int mapWidth;
 short** levelData;
+
 
 
 //Function to load texture
@@ -292,7 +293,7 @@ bool readLayerData(std::ifstream &stream) {
 						if (y == 14 && x == 10) {
 							ostringstream ss;
 							ss << val << " " << y << " " << x << " " << tile.c_str() << " " << (int)levelData[y][x] << "\n";
-							OutputDebugString(ss.str().c_str());
+							//OutputDebugString(ss.str().c_str());
 						}
 					} 
 					else {
@@ -351,14 +352,12 @@ int main(int argc, char *argv[])
 #ifdef _WINDOWS
 	glewInit();
 #endif
-
 	glViewport(0, 0, 640, 360);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	program = new ShaderProgram(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
-	sheet = LoadTexture("dirt-tiles.png");
-	font = LoadTexture("font.png");
+    sheet = LoadTexture("dirt-tiles.png");
+    font = LoadTexture("font.png");
 	projectionMatrix.setOrthoProjection(-3.55f, 3.55f, -2.0f, 2.0f, -1.0f, 1.0f);
 	glUseProgram(program->programID);
 
@@ -382,7 +381,7 @@ int main(int argc, char *argv[])
 					if (state == TITLE_SCREEN) {
 						//Initilization 
 						enemies.clear();
-						ifstream infile("map1.txt");
+						ifstream infile("map2.txt");
 						string line;
 						while (getline(infile, line)) {
 							if (line == "[header]") { if (!readHeader(infile)) { break; } }
@@ -613,7 +612,7 @@ bool Entity::collidesWith(Entity * entity) {
 	}
 	if (entity->entityType == ENEMY) {
 		alive = isColliding ? false : true;
-		state = alive? state : GAME_OVER;
+        state = alive? state : GAME_OVER;
 	}
 	return isColliding;
 }
@@ -628,8 +627,9 @@ bool Entity::collision(Entity* otherEntity) {
 }
 
 bool Entity::isSolidTile(int index) {
-	return (index == 32 || index == 51 || index == 274 || index == 275 || index == 299 ||
-		    index == 321 || index == 347 || index == 345 || index == 301 ||index == 171) 
+    return (index!=0)
+	//return (index == 32 || index == 51 || index == 274 || index == 275 || index == 299 ||
+	//	    index == 321 || index == 347 || index == 345 || index == 301 ||index == 171)
 		? true : false;
 }
 
