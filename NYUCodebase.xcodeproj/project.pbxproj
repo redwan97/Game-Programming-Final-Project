@@ -24,6 +24,8 @@
 		AE78F6791EA98E7900563326 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE78F6781EA98E7900563326 /* SDL2_mixer.framework */; };
 		AE8336B11EC2E671004370D5 /* dirt-tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B01EC2E671004370D5 /* dirt-tiles.png */; settings = {ASSET_TAGS = (); }; };
 		AE8336B31EC2E678004370D5 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B21EC2E678004370D5 /* font.png */; settings = {ASSET_TAGS = (); }; };
+		AE8336B51EC3AF3A004370D5 /* jump1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B41EC3AF3A004370D5 /* jump1.wav */; settings = {ASSET_TAGS = (); }; };
+		AE8336B71EC3B071004370D5 /* jump2.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B61EC3B071004370D5 /* jump2.wav */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		AE78F6781EA98E7900563326 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 		AE8336B01EC2E671004370D5 /* dirt-tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirt-tiles.png"; sourceTree = "<group>"; };
 		AE8336B21EC2E678004370D5 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
+		AE8336B41EC3AF3A004370D5 /* jump1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump1.wav; sourceTree = "<group>"; };
+		AE8336B61EC3B071004370D5 /* jump2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump2.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,8 @@
 				6DE9D2F01BA6AB8C002D599C /* fragment_textured.glsl */,
 				AE8336B01EC2E671004370D5 /* dirt-tiles.png */,
 				AE8336B21EC2E678004370D5 /* font.png */,
+				AE8336B41EC3AF3A004370D5 /* jump1.wav */,
+				AE8336B61EC3B071004370D5 /* jump2.wav */,
 				6DC707691BA7273500225B7D /* vertex_textured.glsl */,
 				6DEF23BC1B96CC2600BCE792 /* Matrix.cpp */,
 				6DEF23BD1B96CC2600BCE792 /* Matrix.h */,
@@ -220,12 +226,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE8336B71EC3B071004370D5 /* jump2.wav in Resources */,
 				6D5A86B819AE5C710066C1FD /* InfoPlist.strings in Resources */,
 				6DEF23C11B96CC2600BCE792 /* fragment.glsl in Resources */,
 				AE8336B31EC2E678004370D5 /* font.png in Resources */,
 				AE8336B11EC2E671004370D5 /* dirt-tiles.png in Resources */,
 				6DE9D2F11BA6AB8C002D599C /* fragment_textured.glsl in Resources */,
 				6D5A86C619AE5C710066C1FD /* Images.xcassets in Resources */,
+				AE8336B51EC3AF3A004370D5 /* jump1.wav in Resources */,
 				6D5A86BE19AE5C710066C1FD /* Credits.rtf in Resources */,
 				6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */,
 				6DC7076A1BA7273500225B7D /* vertex_textured.glsl in Resources */,

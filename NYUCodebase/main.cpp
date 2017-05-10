@@ -12,8 +12,8 @@
 #define LEVEL_WIDTH 128
 #define FIXED_TIMESTEP 0.01666666f
 #define MAX_TIMESTEPS 6
-
 #define STB_IMAGE_IMPLEMENTATION
+#include </Library/Frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h>
 #include "stb_image.h"
 #include "ShaderProgram.h"
 #include "Matrix.h"
@@ -36,6 +36,9 @@ enum EntityType { PLAYER, ENEMY, GOAL };
 //Global Variables
 GameState state = TITLE_SCREEN;
 SDL_Window* displayWindow;
+
+Mix_Chunk *jumpSound;
+
 ShaderProgram* program;
 GLuint sheet;
 GLuint font;
@@ -349,6 +352,8 @@ int main(int argc, char *argv[])
 	displayWindow = SDL_CreateWindow("First Paltformer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 360, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
+    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 4096 );
+    jumpSound = Mix_LoadWAV("jump2.wav");
 #ifdef _WINDOWS
 	glewInit();
 #endif
@@ -392,6 +397,9 @@ int main(int argc, char *argv[])
 						state = GAME_STATE;
 					}
 				}
+                else if (event.key.keysym.scancode == SDL_SCANCODE_UP && state ==GAME_STATE){
+                    Mix_PlayChannel( -1, jumpSound, 0);
+                }
 			}
 			else if (event.type == SDL_KEYUP) {
 				//Allows friction to stop the player by settin acceleration=0 when keys are let go
