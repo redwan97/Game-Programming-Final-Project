@@ -26,6 +26,9 @@
 		AE8336B31EC2E678004370D5 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B21EC2E678004370D5 /* font.png */; settings = {ASSET_TAGS = (); }; };
 		AE8336B51EC3AF3A004370D5 /* jump1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B41EC3AF3A004370D5 /* jump1.wav */; settings = {ASSET_TAGS = (); }; };
 		AE8336B71EC3B071004370D5 /* jump2.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B61EC3B071004370D5 /* jump2.wav */; settings = {ASSET_TAGS = (); }; };
+		AE8336BD1EC63C0E004370D5 /* map1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336BC1EC63C0E004370D5 /* map1.txt */; settings = {ASSET_TAGS = (); }; };
+		AE8336BF1EC63C17004370D5 /* map2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336BE1EC63C17004370D5 /* map2.txt */; settings = {ASSET_TAGS = (); }; };
+		AE8336C11EC63C21004370D5 /* map3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336C01EC63C21004370D5 /* map3.txt */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,9 @@
 		AE8336B21EC2E678004370D5 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
 		AE8336B41EC3AF3A004370D5 /* jump1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump1.wav; sourceTree = "<group>"; };
 		AE8336B61EC3B071004370D5 /* jump2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump2.wav; sourceTree = "<group>"; };
+		AE8336BC1EC63C0E004370D5 /* map1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map1.txt; sourceTree = "<group>"; };
+		AE8336BE1EC63C17004370D5 /* map2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map2.txt; sourceTree = "<group>"; };
+		AE8336C01EC63C21004370D5 /* map3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map3.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,9 @@
 				6DC707691BA7273500225B7D /* vertex_textured.glsl */,
 				6DEF23BC1B96CC2600BCE792 /* Matrix.cpp */,
 				6DEF23BD1B96CC2600BCE792 /* Matrix.h */,
+				AE8336C01EC63C21004370D5 /* map3.txt */,
+				AE8336BE1EC63C17004370D5 /* map2.txt */,
+				AE8336BC1EC63C0E004370D5 /* map1.txt */,
 				6DEF23BE1B96CC2600BCE792 /* ShaderProgram.cpp */,
 				6DEF23BF1B96CC2600BCE792 /* ShaderProgram.h */,
 				6DEF23C01B96CC2600BCE792 /* vertex.glsl */,
@@ -227,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE8336B71EC3B071004370D5 /* jump2.wav in Resources */,
+				AE8336BD1EC63C0E004370D5 /* map1.txt in Resources */,
 				6D5A86B819AE5C710066C1FD /* InfoPlist.strings in Resources */,
 				6DEF23C11B96CC2600BCE792 /* fragment.glsl in Resources */,
 				AE8336B31EC2E678004370D5 /* font.png in Resources */,
@@ -237,6 +247,8 @@
 				6D5A86BE19AE5C710066C1FD /* Credits.rtf in Resources */,
 				6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */,
 				6DC7076A1BA7273500225B7D /* vertex_textured.glsl in Resources */,
+				AE8336BF1EC63C17004370D5 /* map2.txt in Resources */,
+				AE8336C11EC63C21004370D5 /* map3.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

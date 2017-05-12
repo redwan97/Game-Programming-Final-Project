@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="76" height="32" tilewidth="16" tileheight="16" nextobjectid="16">
  <tileset firstgid="1" name="dirt-tiles.png" tilewidth="16" tileheight="16" tilecount="384" columns="24">
-  <image source="../../../../OneDrive/Documents/GitHub/CS3113/assets/sprite_sheets/dirt-tiles.png" width="384" height="256"/>
+  <image source="../../../Game-Programming-Final-Project/NYUCodebase/dirt-tiles.png" width="384" height="256"/>
  </tileset>
  <layer name="Tile Layer 1" width="76" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmM1twzAMhe2TB3BvTQ++Gzl57I7QJdot2ikaoSbAEPyTTCox0Ac8NLEomfwsKXLXcRhWw0Wvo8+cvH17+GU3l1uRxcJjSRojq0+2pfsBr89b2xdTxzPw6j2HNAGv79vnnyReNUwkPi3s5t217UXzyBt4vQ9/pvGZ80vSLPTBtdE6uOtQG3wH3lI7Hqc2XxirNy/puUJOdB+hNdPr2JRD1DrF9+jJy6qXq7lG3NrW4jRm3Dzuxes63vtRktY4t+9JzzObF+b00YEJt/dRcfuaNJ968qLzyppbR84HXL0ZyuLFsbKYtfICRj2UwUtjBW49T0o62t8aGxTNy7PuLGbQX2Mp9edq9TCU1gAdO3u/984dXL/F3KqL3g/+cv20fYLmcw1gtTrq0+q1avCa9pXu6RXHKpqXZ19v+R2waqLX6D7ZIo5VFC9ONfNeyvdonMTTI+mZZu9fj9DRd0ZtDZyZ1zTcvzNMRvxld1Fh9Ya+g6x98qy8Sp3bbtC2X+fmEY6HebWhPl715lV7puTWD9S+7AYtA89Mi8d9PMrkVXIo6wWvk8nIDdpxjMZKqh/GmRzxFrPo8z3kdUGGPLk1s5FY7I2JmUj7Mvjq3yriNWbRvHBuUp40R08fq92qX7IWzzGLfh86muNRR/ICZpLO+vvYUxGMsnjhvaL2zOmJq/19jmaVOb+iedWe+zNYZfFqeaex/gdWM1YWKy8vb2zUM6DjPAurs7iW87/7+BfsV+YN
+   eJztmMttwzAMhu2TB4hvTQ+5Gzl57I7QJdot2ikaoSbAsHxJJpUY6A8QTWxSIr9QstxlHIbFsKKX0WecvLGt41uax7/G5VZksfCYpJYaItl5uNLrwOvjdu+TqeMZePVi5MkHeH3dPn8n8aphIvFpYXfarLaHPLzehl8Df5grs78knYQYXPuJGHcdaoPvwAaPR+eSxud88TgwV29eUp6QE91HKBNub55RLJ6Dxmq9qPUdnqMnL6ve2cjbErcONT+NGdfHvXhdx3t7lKQ1zu2L0u+ZzQtzeu/AhNubqLh1KvVTT160r6ze2nM+4OrNUBYvjpXFrJUXMOqhDF4aK7DW86SkvfHW2KBoXp51ZzGDeI2lFM/V6mEorQE6dvZ+7+0dXL/F3KqLzgd/uThtn6D5XANYLY76tHqtGrxGY6U5veJYRfPy7OstzwGrJnqN7pMt4lhF8eJU0/dSvnv9JJ4eSb9p9v71CNWe3ai0NXBkXtNw/84wGf7nzYoKq1f0HWTtk0flVepcNwOt23Wuj7A/9NWKYrzqzav2TMmtH6j9shnoMvDMNH8c41Emr5JDWS94nUxGbnAf+2ispPphnMnhbzGLPt9DXmdkkCe3Zlbii21lfCZy/zL46l8r/DVm0bxwblKeNEdPjHXfql8yzZ9jFv0+tDfHvRbJC5hJOurzsaciGGXxwntF7ZnT41f7fI5mldlf0bxqz/0ZrLJ4tbzTWP8Dqxkri5WXl9c36jeg4zwLq6NYLed/62M/bUvkAA==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">

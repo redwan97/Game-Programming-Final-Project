@@ -341,6 +341,7 @@ bool readEntityData(std::ifstream &stream) {
 //Function to intialize level: inputFile determines level
 void levelInit(std::string inputFile, vector<float>& vertexData, vector<float>& texCoordData) {
 	enemies.clear();
+    spikes.clear();
 	vertexData.clear();
 	texCoordData.clear();
 	ifstream infile(inputFile);
@@ -392,16 +393,14 @@ int main(int argc, char *argv[])
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	program = new ShaderProgram(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
-    sheet = LoadTexture("dirt-tiles.png");
-    font = LoadTexture("font.png");
+    sheet = LoadTexture("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/dirt-tiles.png");
+    font = LoadTexture("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/font.png");
 	jumpSound = Mix_LoadWAV("jump2.wav");
 	projectionMatrix.setOrthoProjection(-3.55f, 3.55f, -2.0f, 2.0f, -1.0f, 1.0f);
 	glUseProgram(program->programID);
-
 	SDL_Event event;
 	float lastTick = 0.0f;
 	bool done = false;
-
 	while (!done) {
 		float ticks = (float)SDL_GetTicks() / 1000.0f; //Fixed Game Ticks
 		float elapsed = ticks - lastTick;
@@ -411,10 +410,25 @@ int main(int argc, char *argv[])
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) { done = true; }
 			else if (event.type == SDL_KEYDOWN) {
-				if (event.key.keysym.scancode == SDL_SCANCODE_P && gState == GAME_OVER) { gState = TITLE_SCREEN; } 
+                if (event.key.keysym.scancode == SDL_SCANCODE_P && gState == GAME_OVER) { gState = TITLE_SCREEN;}
 				if (event.key.keysym.scancode == SDL_SCANCODE_Q && gState == GAME_OVER) { SDL_Quit();; }
 				else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
-					if (gState == TITLE_SCREEN) { levelInit("map2.txt", vertexData, texCoordData); } //Level 1 Initilization 
+                    if (gState == TITLE_SCREEN) {
+                        lState = LEVEL_1;
+                        levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map2.txt", vertexData, texCoordData); } //Level 1 Initilization
+                    else if (gState == GAME_STATE){
+                        if(lState == LEVEL_1){
+                            levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map1.txt", vertexData, texCoordData);
+                            lState = LEVEL_2;
+                        }
+                        else if (lState == LEVEL_2){
+                            levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map3.txt", vertexData, texCoordData);
+                            lState = LEVEL_3;
+                        }else{
+                            gState = TITLE_SCREEN;
+                            lState = LEVEL_1;
+                        }
+                    }
 				}
 			}
 			else if (event.type == SDL_KEYUP) {
@@ -636,14 +650,14 @@ bool Entity::collidesWith(Entity * entity) {
 			if (won) {
 				lState = LEVEL_2;
 				won = false; 
-				levelInit("map1.txt", vertexData, texCoordData); //Level 2 Initilization 
+                levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map1.txt", vertexData, texCoordData); //Level 2 Initilization
  			}
 		}
 		if (lState == LEVEL_2) {
 			if (won) {
 				lState = LEVEL_3;
 				won = false;
-				levelInit("map3.txt", vertexData, texCoordData); //Level 3 Initilization 
+                levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map3.txt", vertexData, texCoordData); //Level 3 Initilization
 			}
 		}
 		if (lState == LEVEL_3) {
@@ -656,7 +670,6 @@ bool Entity::collidesWith(Entity * entity) {
 	}
 	return isColliding;
 }
-
 bool Entity::collision(Entity* otherEntity) {
 	return 
 	   (y - (height / 2) > otherEntity->y + (otherEntity->height) / 2 ||
@@ -665,7 +678,6 @@ bool Entity::collision(Entity* otherEntity) {
 		x + (width / 2) < otherEntity->x - (otherEntity->width) / 2)
 		? false : true;
 }
-
 bool Entity::isSolidTile(int index) {
 	if (lState == LEVEL_1 || lState == LEVEL_3) {
 		return (index == 0 || index == 8 || index == 78 || index == 187) ? false : true;

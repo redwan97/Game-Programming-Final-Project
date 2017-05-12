@@ -6,7 +6,7 @@ tileheight=16
 orientation=orthogonal
 
 [tilesets]
-tileset=dirt-tiles.png,16,16,0,0
+tileset=../../../Game-Programming-Final-Project/NYUCodebase/dirt-tiles.png,16,16,0,0
 
 [layer]
 type=Tile Layer 1
@@ -103,4 +103,24 @@ location=42,5,1,1
 # Enemy10
 type=Enemy
 location=13,18,1,1
+
+[Object Layer 1]
+# Spike1
+type=Spike
+location=6,31,1,1
+
+[Object Layer 1]
+# Spike2
+type=Spike
+location=23,25,1,1
+
+[Object Layer 1]
+# Spike3
+type=Spike
+location=50,23,1,1
+
+[Object Layer 1]
+# Spike4
+type=Spike
+location=31,9,1,1
 
