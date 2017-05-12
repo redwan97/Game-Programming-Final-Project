@@ -1,8 +1,11 @@
 #ifdef _WINDOWS
 	#include <GL/glew.h>
+	#include <SDL_mixer.h>
+    #include <Windows.h>
 	#define RESOURCE_FOLDER ""
 #else
 	#define RESOURCE_FOLDER "NYUCodebase.app/Contents/Resources/"
+	#include </Library/Frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h>
 #endif
 
 #define SPRITE_COUNT_X 24
@@ -13,7 +16,6 @@
 #define FIXED_TIMESTEP 0.01666666f
 #define MAX_TIMESTEPS 6
 #define STB_IMAGE_IMPLEMENTATION
-#include </Library/Frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h>
 #include "stb_image.h"
 #include "ShaderProgram.h"
 #include "Matrix.h"
@@ -26,20 +28,21 @@
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
-//#include <Windows.h>
+
 
 using namespace std;
 
-enum GameState { TITLE_SCREEN, GAME_STATE, GAME_OVER };
-enum EntityType { PLAYER, ENEMY, GOAL };
-
 //Global Variables
-GameState state = TITLE_SCREEN;
+enum GameState { TITLE_SCREEN, GAME_STATE, GAME_OVER };
+enum LevelState { LEVEL_1, LEVEL_2, LEVEL_3};
+enum EntityType { PLAYER, ENEMY, GOAL, SPIKE };
+vector<float> vertexData;
+vector<float> texCoordData;
+GameState gState = TITLE_SCREEN;
+LevelState lState = LEVEL_1;
 SDL_Window* displayWindow;
-
-Mix_Chunk *jumpSound;
-
 ShaderProgram* program;
+Mix_Chunk* jumpSound;
 GLuint sheet;
 GLuint font;
 Matrix modelMatrix;
@@ -48,8 +51,6 @@ Matrix projectionMatrix;
 int mapHeight;
 int mapWidth;
 short** levelData;
-
-
 
 //Function to load texture
 GLuint LoadTexture(const char* filePath) {
@@ -187,16 +188,18 @@ private:
 Entity player;
 Entity goal;
 vector<Entity*> enemies;
+vector<Entity*> spikes;
 
 //Function to place entities in respected positions
-void placeEntity(const string& type, float x, float y) {
+void placeEntity(const std::string& type, float x, float y) {
 	if (type == "Player" || type == "player") { player = Entity(x, y, 90, type); }
+	else if (type == "Goal" || type == "goal") { goal = Entity(x, y, 233, type); }
 	else if (type == "Enemy" || type == "enemy") { enemies.push_back(new Entity(x, y, 136, type)); }
-	else if (type == "Goal" || type == "goal") { goal = Entity(x, y, 146, type); }
+	else if (type == "Spike" || type == "spike") { spikes.push_back(new Entity(x, y, 148, type)); }
 }
 
 //Function for scrolling. Mostly centers the viewMatrix on player
-void centerPlayer() {
+void centerPlayer(ShaderProgram* program) {
 	viewMatrix.identity();
 	viewMatrix.Scale(2.0f, 2.0f, 1.0f);
 	if (player.y > -5.5f) { viewMatrix.Translate(-player.x, -player.y, 0.0f); }
@@ -335,6 +338,22 @@ bool readEntityData(std::ifstream &stream) {
 	return true;
 }
 
+//Function to intialize level: inputFile determines level
+void levelInit(std::string inputFile, vector<float>& vertexData, vector<float>& texCoordData) {
+	enemies.clear();
+	vertexData.clear();
+	texCoordData.clear();
+	ifstream infile(inputFile);
+	string line;
+	while (getline(infile, line)) {
+		if (line == "[header]") { if (!readHeader(infile)) { break; } }
+		else if (line == "[layer]") { readLayerData(infile); }
+		else if (line == "[Object Layer 1]") { readEntityData(infile); }
+	}
+	drawMap(vertexData, texCoordData);
+	gState = GAME_STATE;
+}
+
 //Function to update entities based on elapsed time
 void update(float elapsed) {
 	player.Update(elapsed);
@@ -344,6 +363,19 @@ void update(float elapsed) {
 		enemies[i]->Update(elapsed);
 		player.collidesWith(enemies[i]);
 	}
+	for (size_t i = 0; i < spikes.size(); i++) {
+		spikes[i]->Update(elapsed);
+		player.collidesWith(spikes[i]);
+	}
+}
+
+//Function to render entities
+void render(ShaderProgram* program) {
+	player.Render(program);
+	centerPlayer(program);
+	goal.Render(program);
+	for (size_t i = 0; i < enemies.size(); i++) { enemies[i]->Render(program); }
+	for (size_t i = 0; i < spikes.size(); i++) { spikes[i]->Render(program); }
 }
 
 int main(int argc, char *argv[])
@@ -353,7 +385,6 @@ int main(int argc, char *argv[])
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
     Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 4096 );
-    jumpSound = Mix_LoadWAV("jump2.wav");
 #ifdef _WINDOWS
 	glewInit();
 #endif
@@ -363,17 +394,16 @@ int main(int argc, char *argv[])
 	program = new ShaderProgram(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
     sheet = LoadTexture("dirt-tiles.png");
     font = LoadTexture("font.png");
+	jumpSound = Mix_LoadWAV("jump2.wav");
 	projectionMatrix.setOrthoProjection(-3.55f, 3.55f, -2.0f, 2.0f, -1.0f, 1.0f);
 	glUseProgram(program->programID);
 
 	SDL_Event event;
-	vector<float> vertexData;
-	vector<float> texCoordData;
 	float lastTick = 0.0f;
 	bool done = false;
 
 	while (!done) {
-		float ticks = (float)SDL_GetTicks() / 1000.0f;		//Fixed Game Ticks
+		float ticks = (float)SDL_GetTicks() / 1000.0f; //Fixed Game Ticks
 		float elapsed = ticks - lastTick;
 		lastTick = ticks;
 		float fixedElapsed = elapsed;
@@ -381,25 +411,11 @@ int main(int argc, char *argv[])
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) { done = true; }
 			else if (event.type == SDL_KEYDOWN) {
-				if (event.key.keysym.scancode == SDL_SCANCODE_P && state == GAME_OVER) { state = TITLE_SCREEN; } //
+				if (event.key.keysym.scancode == SDL_SCANCODE_P && gState == GAME_OVER) { gState = TITLE_SCREEN; } 
+				if (event.key.keysym.scancode == SDL_SCANCODE_Q && gState == GAME_OVER) { SDL_Quit();; }
 				else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
-					if (state == TITLE_SCREEN) {
-						//Initilization 
-						enemies.clear();
-						ifstream infile("map2.txt");
-						string line;
-						while (getline(infile, line)) {
-							if (line == "[header]") { if (!readHeader(infile)) { break; } }
-							else if (line == "[layer]") { readLayerData(infile); }
-							else if (line == "[Object Layer 1]") { readEntityData(infile); }
-						}
-						drawMap(vertexData, texCoordData);
-						state = GAME_STATE;
-					}
+					if (gState == TITLE_SCREEN) { levelInit("map2.txt", vertexData, texCoordData); } //Level 1 Initilization 
 				}
-                else if (event.key.keysym.scancode == SDL_SCANCODE_UP && state ==GAME_STATE){
-                    Mix_PlayChannel( -1, jumpSound, 0);
-                }
 			}
 			else if (event.type == SDL_KEYUP) {
 				//Allows friction to stop the player by settin acceleration=0 when keys are let go
@@ -418,7 +434,7 @@ int main(int argc, char *argv[])
 		program->setViewMatrix(viewMatrix);
 		glEnable(GL_BLEND);
 	
-		switch (state) 
+		switch (gState) 
 		{
 		case TITLE_SCREEN:
 			write("Platformers!", -1.75f, 1.5f, 0.0f);
@@ -432,22 +448,12 @@ int main(int argc, char *argv[])
 			break;
 
 		case GAME_STATE:
-			//Map rendering
+			//Map rendering, Fixed Elapsed time updating, Entity Updating and rendering
 			renderMap(program, vertexData, texCoordData);
-			//Fixing elapsed time
 			if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS) { fixedElapsed = FIXED_TIMESTEP * MAX_TIMESTEPS; }
-			while (fixedElapsed >= FIXED_TIMESTEP) {
-				fixedElapsed -= FIXED_TIMESTEP;
-				update(FIXED_TIMESTEP);
-			}
-			//Entity Updating and rendering
+			while (fixedElapsed >= FIXED_TIMESTEP) { fixedElapsed -= FIXED_TIMESTEP; update(FIXED_TIMESTEP); }
 			update(fixedElapsed);
-			player.Render(program);
-			centerPlayer();
-			goal.Render(program);
-			for (size_t i = 0; i < enemies.size(); i++) {
-				enemies[i]->Render(program);
-			}
+			render(program);
 			break;
 
 		case GAME_OVER:
@@ -455,17 +461,19 @@ int main(int argc, char *argv[])
 			if (player.won) { output = "YOU WON!"; }
 			else { output = "YOU LOST!"; }
 			write(output, -1.75f, 1.5f, 0.0f, 0.5f);
-			write("Press P to play again!", -2.5f, 0.0f, 0.0f);		
+			write("Press P to play again!", -3.29f, 0.4f, 0.0f, 0.28f, 0.0f);
+			if (player.won == false) { write("Press Q to quit, QUITTER!", -3.29f, 0.0f, 0.0f, 0.28f); }
 			viewMatrix.identity();
 			program->setViewMatrix(viewMatrix);
 			break;
 		}
 		SDL_GL_SwapWindow(displayWindow);
 	}
+	//Cleanup
+	Mix_FreeChunk(jumpSound);
 	SDL_Quit();
 	return 0;
 }
-
 
 Entity::Entity(float posX, float posY, float entityIndex, string type) {
 	x = posX;
@@ -487,17 +495,25 @@ Entity::Entity(float posX, float posY, float entityIndex, string type) {
 		friction_x = 0.0f;
 		friction_y = 0.0f;
 	}
+	else if (type == "spike" || type == "Spike") {
+		entityType = SPIKE;
+		friction_x = 0.0f;
+		friction_y = 0.0f;
+	}
 }
 
 void Entity::Update(float elapsed) {
-	float maxMovingSpeed = 10.0f;
+	float maxMovingSpeed = 12.0f;
 	velocity_x = lerp(velocity_x, 0.0f, elapsed*friction_x);
 	velocity_y = lerp(velocity_y, 0.0f, elapsed*friction_y);
 	if (entityType == PLAYER) {
 		const Uint8 *keys = SDL_GetKeyboardState(NULL);
-		if ((keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) && collidedBottom == true) { velocity_y = 3.2f; }
-		if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) { acceleration_x = 0.75f; }
-		else if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) { acceleration_x = -0.75f; }
+		if ((keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) && collidedBottom == true) { 
+			velocity_y = 3.5f; //3.5 for testing, 3.2 original value 
+			Mix_PlayChannel(-1, jumpSound, 0);
+		}
+		if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) { acceleration_x = 0.80f; }
+		else if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) { acceleration_x = -0.80f; }
 	}
 	if (velocity_x < maxMovingSpeed) { velocity_x += acceleration_x * elapsed; }
 	velocity_y += acceleration_y * elapsed;
@@ -594,7 +610,7 @@ void Entity::collisionY() {
 		collidedBottom = true;
 	}
 	else {
-		acceleration_y = -9.8;
+		acceleration_y = -9.8f;
 		pen_y = 0;
 		collidedBottom = false;
 	}
@@ -615,12 +631,28 @@ void Entity::collisionY() {
 bool Entity::collidesWith(Entity * entity) {
 	bool isColliding = collision(entity);
 	if (entity->entityType == GOAL) {
-		won = isColliding ? true : false;
-		state = won ? GAME_OVER : state;
+		won = isColliding ? true : false;	
+		if (lState == LEVEL_1) {
+			if (won) {
+				lState = LEVEL_2;
+				won = false; 
+				levelInit("map1.txt", vertexData, texCoordData); //Level 2 Initilization 
+ 			}
+		}
+		if (lState == LEVEL_2) {
+			if (won) {
+				lState = LEVEL_3;
+				won = false;
+				levelInit("map3.txt", vertexData, texCoordData); //Level 3 Initilization 
+			}
+		}
+		if (lState == LEVEL_3) {
+			gState = won ? GAME_OVER : gState;
+		}
 	}
-	if (entity->entityType == ENEMY) {
+	if (entity->entityType == ENEMY || entity->entityType == SPIKE) {
 		alive = isColliding ? false : true;
-        state = alive? state : GAME_OVER;
+        gState = alive? gState : GAME_OVER;
 	}
 	return isColliding;
 }
@@ -635,9 +667,11 @@ bool Entity::collision(Entity* otherEntity) {
 }
 
 bool Entity::isSolidTile(int index) {
-    return (index!=0)
-	//return (index == 32 || index == 51 || index == 274 || index == 275 || index == 299 ||
-	//	    index == 321 || index == 347 || index == 345 || index == 301 ||index == 171)
+	if (lState == LEVEL_1 || lState == LEVEL_3) {
+		return (index == 0 || index == 8 || index == 78 || index == 187) ? false : true;
+	}
+	return (index == 32 || index == 51 || index == 274 || index == 275 || index == 299 ||
+		    index == 321 || index == 347 || index == 345 || index == 301 || index == 171)
 		? true : false;
 }
 

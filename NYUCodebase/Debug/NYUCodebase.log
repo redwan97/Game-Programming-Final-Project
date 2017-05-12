@@ -1,4 +1,3 @@
 ﻿  main.cpp
-c:\users\heart\desktop\cshw\gameprogramminghw\homework4\nyucodebase\main.cpp(590): warning C4305: '=': truncation from 'double' to 'float'
-  NYUCodebase.vcxproj -> C:\Users\heart\Desktop\cshw\GameProgrammingHw\Homework4\Debug\NYUCodebase.exe
-  NYUCodebase.vcxproj -> C:\Users\heart\Desktop\cshw\GameProgrammingHw\Homework4\Debug\NYUCodebase.pdb (Partial PDB)
+  NYUCodebase.vcxproj -> C:\Users\heart\Desktop\cshw\FinalProject\Debug\NYUCodebase.exe
+  NYUCodebase.vcxproj -> C:\Users\heart\Desktop\cshw\FinalProject\Debug\NYUCodebase.pdb (Partial PDB)
