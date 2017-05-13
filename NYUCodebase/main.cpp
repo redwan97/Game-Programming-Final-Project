@@ -437,6 +437,7 @@ int main(int argc, char *argv[])
                         Mix_PlayMusic(gameMusic, -1);
                         lState = LEVEL_1;
                         levelInit(RESOURCE_FOLDER2"map2.txt", vertexData, texCoordData); } //Level 1 Initilization
+                    //Allows to skip through levels by pressing space. For presentation purposes
                     else if (gState == GAME_STATE){
                         if(lState == LEVEL_1){
                             levelInit(RESOURCE_FOLDER2"map1.txt", vertexData, texCoordData);
@@ -445,7 +446,8 @@ int main(int argc, char *argv[])
                         else if (lState == LEVEL_2){
                             levelInit(RESOURCE_FOLDER2"map3.txt", vertexData, texCoordData);
                             lState = LEVEL_3;
-                        }else{
+                        }
+                        else{
                             gState = TITLE_SCREEN;
                             lState = LEVEL_1;
                         }
@@ -472,12 +474,12 @@ int main(int argc, char *argv[])
 		switch (gState) 
 		{
 		case TITLE_SCREEN:
-			write("Platformers!", -1.75f, 1.5f, 0.0f);
-			write("Instructions: ", -3.3f, 0.9f, 0.0f, 0.23f);
-			write("Use Arrow keys OR", -2.70f, 0.65f, 0.0f, 0.23f);
-			write("WASD to move", -2.70f, 0.40f, 0.0f, 0.23f);
-			write("Find the goal ", -2.70f, 0.15f, 0.0f, 0.23f);
-			write("Press Space to Play!", -2.70f, -0.35f, 0.0f);
+			write("Momentum Runner", -3.1f, 1.5f, 0.0f, .45f);
+			write("Instructions: ", -3.3f, 0.7f, 0.0f, 0.23f);
+			write("Use Arrow keys OR", -2.70f, 0.45f, 0.0f, 0.23f);
+			write("WASD to move", -2.70f, 0.20f, 0.0f, 0.23f);
+			write("Find the goal ", -2.70f, -.05f, 0.0f, 0.23f);
+			write("Press Space to Play!", -2.70f, -0.75f, 0.0f, .3f);
 			viewMatrix.identity();
 			program->setViewMatrix(viewMatrix);
 			break;
@@ -497,7 +499,11 @@ int main(int argc, char *argv[])
 			else { output = "YOU LOST!"; }
 			write(output, -1.75f, 1.5f, 0.0f, 0.5f);
 			write("Press P to play again!", -3.29f, 0.4f, 0.0f, 0.28f, 0.0f);
-			if (player.won == false) { write("Press Q to quit, QUITTER!", -3.29f, 0.0f, 0.0f, 0.28f); }
+			if (player.won == false) {
+                write("Press Q to quit, QUITTER!", -3.29f, 0.0f, 0.0f, 0.28f);
+                write("TIP: USE MOMENTUM!", -3.29f, -0.7f,0.0f,0.28f);
+                write("ITS IN THE NAME!", -1.90f, -0.9f,0.0f,0.28f);
+            }
 			viewMatrix.identity();
 			program->setViewMatrix(viewMatrix);
 			break;
