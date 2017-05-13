@@ -1,3 +1,13 @@
+/*
+Redwanul Mutee 
+Laila Esa
+GameProgramming Final Project
+ 
+ 
+Note to Professor: Please change the directory for RESOURCE_FOLDER2 if you are using Mac
+*/
+
+
 #ifdef _WINDOWS
 	#include <GL/glew.h>
 	#include <SDL_mixer.h>
@@ -215,7 +225,7 @@ void placeEntity(const std::string& type, float x, float y) {
 	else if (type == "Spike" || type == "spike") { spikes.push_back(new Entity(x, y, 148, type)); }
 }
 
-//Function for scrolling. Mostly centers the viewMatrix on player
+//Function that mostly centers the viewMatrix on player
 void centerPlayer(ShaderProgram* program) {
 	viewMatrix.identity();
 	viewMatrix.Scale(2.0f, 2.0f, 1.0f);
