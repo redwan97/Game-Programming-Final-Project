@@ -706,10 +706,11 @@ bool Entity::collision(Entity* otherEntity) {
 
 bool Entity::isSolidTile(int index) {
 	if (lState == LEVEL_1 || lState == LEVEL_3) {
-		return (index == 0 || index == 8 || index == 78 || index == 187) ? false : true;
+		return (index == 0 || index == 8 || index == 78 || index == 187 || index == 209) ? false : true;
 	}
 	return (index == 32 || index == 51 || index == 274 || index == 275 || index == 299 ||
-		    index == 321 || index == 347 || index == 345 || index == 301 || index == 171)
+		    index == 321 || index == 347 || index == 345 || index == 301 || index == 171
+            || index == 233 || index == 209 || index == 232 || index == 208)
 		? true : false;
 }
 

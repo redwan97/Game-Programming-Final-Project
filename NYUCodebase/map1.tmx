@@ -5,11 +5,11 @@
  </tileset>
  <layer name="Tile Layer 1" width="76" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmMttwzAMhu2TB4hvTQ+5Gzl57I7QJdot2ikaoSbAsHxJJpUY6A8QTWxSIr9QstxlHIbFsKKX0WecvLGt41uax7/G5VZksfCYpJYaItl5uNLrwOvjdu+TqeMZePVi5MkHeH3dPn8n8aphIvFpYXfarLaHPLzehl8Df5grs78knYQYXPuJGHcdaoPvwAaPR+eSxud88TgwV29eUp6QE91HKBNub55RLJ6Dxmq9qPUdnqMnL6ve2cjbErcONT+NGdfHvXhdx3t7lKQ1zu2L0u+ZzQtzeu/AhNubqLh1KvVTT160r6ze2nM+4OrNUBYvjpXFrJUXMOqhDF4aK7DW86SkvfHW2KBoXp51ZzGDeI2lFM/V6mEorQE6dvZ+7+0dXL/F3KqLzgd/uThtn6D5XANYLY76tHqtGrxGY6U5veJYRfPy7OstzwGrJnqN7pMt4lhF8eJU0/dSvnv9JJ4eSb9p9v71CNWe3ai0NXBkXtNw/84wGf7nzYoKq1f0HWTtk0flVepcNwOt23Wuj7A/9NWKYrzqzav2TMmtH6j9shnoMvDMNH8c41Emr5JDWS94nUxGbnAf+2ispPphnMnhbzGLPt9DXmdkkCe3Zlbii21lfCZy/zL46l8r/DVm0bxwblKeNEdPjHXfql8yzZ9jFv0+tDfHvRbJC5hJOurzsaciGGXxwntF7ZnT41f7fI5mldlf0bxqz/0ZrLJ4tbzTWP8Dqxkri5WXl9c36jeg4zwLq6NYLed/62M/bUvkAA==
+   eJztmEtug0AMhmHFAWDXdJF9lBXH7hF6ifYW7SmaUbHkuH7NYE+C1F+ykoA92B+eYchlHIaLYUUvo884eWNbx7e0jH+Ny63IYuExSS01RLLzcKXHgdfH7dwnU8cz8OrFyJMP8Pq6ff9O4lXDROLTwm7erLaHPLzehl/DmgNYaf0laRZicO0zMe441Aa/gQ0ej15LGp/zpbktD+Al5Qn50HWEMuHW5gXF4mvQWK0Xtb7DY/XkZdW7GHlb4uah5qcx4/q4F6/reG+PkjTHuXVRup/ZvDCn9w5MuLWJipunUj/15EX7yuqtPfsDrt4MZfHiWFnMWnkBox7K4KWxAmvdT0raG2+NDYrm5Zl3FjOI11hK8VytHobSHKBjZ6/33t7B9VvMrbro9eCTi9PWCZrPNYDVxVGfVq9Vg9dorHRNrzhW0bw863rLc8CqiR6j62SLOFZRvDjV9L2U714/iadH0j3NXr8eodq9G5U2B47Maxru3xkmw/+0WVFh9Yp+g6x18qi8Sp3rZqB1O871EfaHvlpRjFe9edXuKbn5A7WfNwOdB56Z5o9jPMrkVXIo8wXPk8nIDc5jH42VVD+MMzn8LWbR+3vI64QM8uTmzEp8sa2Mz0TOnwdf/WuFv8YsmhfOTcqT5uiJsc5b9Uum+XPMot+H9ua41yJ5ATNJR30+9lQEoyxeeK2o3XN6/Gqfz9GsMvsrmlftvj+DVRavlnca6z+wmrGyWHl5eX2j7gEd51lYHcVqOf9bH/sBZHPjug==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="1" name="Player" type="Player" x="196" y="332" width="16" height="16"/>
+  <object id="1" name="Player" type="Player" x="173" y="342" width="16" height="16"/>
   <object id="2" name="Enemy1" type="Enemy" x="368" y="336" width="16" height="16"/>
   <object id="3" name="Enemy2" type="Enemy" x="368" y="464" width="16" height="16"/>
   <object id="4" name="Enemy 3" type="Enemy" x="192" y="464" width="16" height="16"/>
@@ -18,7 +18,7 @@
   <object id="7" name="Enemy6" type="Enemy" x="528" y="192" width="16" height="16"/>
   <object id="8" name="Enemy7" type="Enemy" x="832" y="480" width="16" height="16"/>
   <object id="9" name="Enemy8" type="Enemy" x="368" y="48" width="16" height="16"/>
-  <object id="10" name="Goal" type="Goal" x="1008" y="0" width="16" height="16"/>
+  <object id="10" name="Goal" type="Goal" x="1007" y="0" width="16" height="16"/>
   <object id="11" name="Spike1" type="Spike" x="544" y="64" width="16" height="16"/>
   <object id="12" name="Spike2" type="Spike" x="544" y="64" width="16" height="16"/>
   <object id="13" name="Spike3" type="Spike" x="688" y="128" width="16" height="16"/>
