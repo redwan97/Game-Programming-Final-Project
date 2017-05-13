@@ -3,7 +3,9 @@
 	#include <SDL_mixer.h>
     #include <Windows.h>
 	#define RESOURCE_FOLDER ""
+	#define RESOURCE_FOLDER2 ""
 #else
+    #define RESOURCE_FOLDER2 "/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/"
 	#define RESOURCE_FOLDER "NYUCodebase.app/Contents/Resources/"
 	#include </Library/Frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h>
 #endif
@@ -398,7 +400,7 @@ void render(ShaderProgram* program) {
 int main(int argc, char *argv[])
 {	
 	SDL_Init(SDL_INIT_VIDEO);
-	displayWindow = SDL_CreateWindow("First Paltformer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 360, SDL_WINDOW_OPENGL);
+	displayWindow = SDL_CreateWindow("First Platformer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 360, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
     Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 4096 );
@@ -409,8 +411,8 @@ int main(int argc, char *argv[])
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	program = new ShaderProgram(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
-    sheet = LoadTexture("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/dirt-tiles.png");
-    font = LoadTexture("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/font.png");
+    sheet = LoadTexture(RESOURCE_FOLDER2"dirt-tiles.png");
+    font = LoadTexture(RESOURCE_FOLDER2"font.png");
 	jumpSound = Mix_LoadWAV("jump2.wav");
     gameMusic = Mix_LoadMUS("gameMusic4.mp3");
 	projectionMatrix.setOrthoProjection(-3.55f, 3.55f, -2.0f, 2.0f, -1.0f, 1.0f);
@@ -433,14 +435,14 @@ int main(int argc, char *argv[])
                     if (gState == TITLE_SCREEN) {
                         Mix_PlayMusic(gameMusic, -1);
                         lState = LEVEL_1;
-                        levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map2.txt", vertexData, texCoordData); } //Level 1 Initilization
+                        levelInit(RESOURCE_FOLDER2"map2.txt", vertexData, texCoordData); } //Level 1 Initilization
                     else if (gState == GAME_STATE){
                         if(lState == LEVEL_1){
-                            levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map1.txt", vertexData, texCoordData);
+                            levelInit(RESOURCE_FOLDER2"map1.txt", vertexData, texCoordData);
                             lState = LEVEL_2;
                         }
                         else if (lState == LEVEL_2){
-                            levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map3.txt", vertexData, texCoordData);
+                            levelInit(RESOURCE_FOLDER2"map3.txt", vertexData, texCoordData);
                             lState = LEVEL_3;
                         }else{
                             gState = TITLE_SCREEN;
@@ -544,7 +546,7 @@ void Entity::Update(float elapsed) {
 	if (entityType == PLAYER) {
 		const Uint8 *keys = SDL_GetKeyboardState(NULL);
 		if ((keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) && collidedBottom == true) { 
-			velocity_y = 3.5f; //3.5 for testing, 3.2 original value 
+			velocity_y = 3.35f; //3.5 for testing, 3.2 original value 
 			Mix_PlayChannel(-1, jumpSound, 0);
 		}
 		if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) { acceleration_x = 0.80f; }
@@ -672,14 +674,14 @@ bool Entity::collidesWith(Entity * entity) {
 			if (won) {
 				lState = LEVEL_2;
 				won = false; 
-                levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map1.txt", vertexData, texCoordData); //Level 2 Initilization
+                levelInit(RESOURCE_FOLDER2"map1.txt", vertexData, texCoordData); //Level 2 Initilization
  			}
 		}
 		if (lState == LEVEL_2) {
 			if (won) {
 				lState = LEVEL_3;
 				won = false;
-                levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map3.txt", vertexData, texCoordData); //Level 3 Initilization
+                levelInit(RESOURCE_FOLDER2"map3.txt", vertexData, texCoordData); //Level 3 Initilization
 			}
 		}
 		if (lState == LEVEL_3) {
@@ -692,6 +694,7 @@ bool Entity::collidesWith(Entity * entity) {
 	}
 	return isColliding;
 }
+
 bool Entity::collision(Entity* otherEntity) {
 	return 
 	   (y - (height / 2) > otherEntity->y + (otherEntity->height) / 2 ||
@@ -700,6 +703,7 @@ bool Entity::collision(Entity* otherEntity) {
 		x + (width / 2) < otherEntity->x - (otherEntity->width) / 2)
 		? false : true;
 }
+
 bool Entity::isSolidTile(int index) {
 	if (lState == LEVEL_1 || lState == LEVEL_3) {
 		return (index == 0 || index == 8 || index == 78 || index == 187) ? false : true;

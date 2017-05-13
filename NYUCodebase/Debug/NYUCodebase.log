@@ -1,3 +1,6 @@
 ﻿  main.cpp
+c:\users\heart\desktop\cshw\finalproject\nyucodebase\main.cpp(544): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\heart\desktop\cshw\finalproject\nyucodebase\main.cpp(545): warning C4305: 'argument': truncation from 'double' to 'float'
+  LINK : C:\Users\heart\Desktop\cshw\FinalProject\Debug\NYUCodebase.exe not found or not built by the last incremental link; performing full link
   NYUCodebase.vcxproj -> C:\Users\heart\Desktop\cshw\FinalProject\Debug\NYUCodebase.exe
   NYUCodebase.vcxproj -> C:\Users\heart\Desktop\cshw\FinalProject\Debug\NYUCodebase.pdb (Partial PDB)
