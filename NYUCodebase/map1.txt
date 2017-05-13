@@ -47,7 +47,7 @@ data=
 [Object Layer 1]
 # Player
 type=Player
-location=31,2,1,1
+location=12,20,1,1
 
 [Object Layer 1]
 # Enemy1

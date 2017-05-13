@@ -43,6 +43,7 @@ LevelState lState = LEVEL_1;
 SDL_Window* displayWindow;
 ShaderProgram* program;
 Mix_Chunk* jumpSound;
+Mix_Music* gameMusic;
 GLuint sheet;
 GLuint font;
 Matrix modelMatrix;
@@ -393,9 +394,10 @@ int main(int argc, char *argv[])
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	program = new ShaderProgram(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
-    sheet = LoadTexture("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/dirt-tiles.png");
-    font = LoadTexture("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/font.png");
+    sheet = LoadTexture("dirt-tiles.png");
+    font = LoadTexture("font.png");
 	jumpSound = Mix_LoadWAV("jump2.wav");
+    gameMusic = Mix_LoadMUS("gameMusic4.mp3");
 	projectionMatrix.setOrthoProjection(-3.55f, 3.55f, -2.0f, 2.0f, -1.0f, 1.0f);
 	glUseProgram(program->programID);
 	SDL_Event event;
@@ -406,7 +408,7 @@ int main(int argc, char *argv[])
 		float elapsed = ticks - lastTick;
 		lastTick = ticks;
 		float fixedElapsed = elapsed;
-
+        
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) { done = true; }
 			else if (event.type == SDL_KEYDOWN) {
@@ -414,15 +416,16 @@ int main(int argc, char *argv[])
 				if (event.key.keysym.scancode == SDL_SCANCODE_Q && gState == GAME_OVER) { SDL_Quit();; }
 				else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
                     if (gState == TITLE_SCREEN) {
+                        Mix_PlayMusic(gameMusic, -1);
                         lState = LEVEL_1;
-                        levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map2.txt", vertexData, texCoordData); } //Level 1 Initilization
+                        levelInit("map2.txt", vertexData, texCoordData); } //Level 1 Initilization
                     else if (gState == GAME_STATE){
                         if(lState == LEVEL_1){
-                            levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map1.txt", vertexData, texCoordData);
+                            levelInit("map1.txt", vertexData, texCoordData);
                             lState = LEVEL_2;
                         }
                         else if (lState == LEVEL_2){
-                            levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map3.txt", vertexData, texCoordData);
+                            levelInit("map3.txt", vertexData, texCoordData);
                             lState = LEVEL_3;
                         }else{
                             gState = TITLE_SCREEN;
@@ -447,7 +450,7 @@ int main(int argc, char *argv[])
 		program->setProjectionMatrix(projectionMatrix);
 		program->setViewMatrix(viewMatrix);
 		glEnable(GL_BLEND);
-	
+
 		switch (gState) 
 		{
 		case TITLE_SCREEN:
@@ -485,6 +488,7 @@ int main(int argc, char *argv[])
 	}
 	//Cleanup
 	Mix_FreeChunk(jumpSound);
+    Mix_FreeMusic(gameMusic);
 	SDL_Quit();
 	return 0;
 }
@@ -650,14 +654,14 @@ bool Entity::collidesWith(Entity * entity) {
 			if (won) {
 				lState = LEVEL_2;
 				won = false; 
-                levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map1.txt", vertexData, texCoordData); //Level 2 Initilization
+                levelInit("map1.txt", vertexData, texCoordData); //Level 2 Initilization
  			}
 		}
 		if (lState == LEVEL_2) {
 			if (won) {
 				lState = LEVEL_3;
 				won = false;
-                levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map3.txt", vertexData, texCoordData); //Level 3 Initilization
+                levelInit("map3.txt", vertexData, texCoordData); //Level 3 Initilization
 			}
 		}
 		if (lState == LEVEL_3) {

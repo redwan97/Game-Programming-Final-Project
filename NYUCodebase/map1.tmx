@@ -9,7 +9,7 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="1" name="Player" type="Player" x="496" y="32" width="16" height="16"/>
+  <object id="1" name="Player" type="Player" x="196" y="332" width="16" height="16"/>
   <object id="2" name="Enemy1" type="Enemy" x="368" y="336" width="16" height="16"/>
   <object id="3" name="Enemy2" type="Enemy" x="368" y="464" width="16" height="16"/>
   <object id="4" name="Enemy 3" type="Enemy" x="192" y="464" width="16" height="16"/>

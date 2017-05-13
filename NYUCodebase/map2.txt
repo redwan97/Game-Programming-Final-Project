@@ -122,5 +122,5 @@ location=12,17,1,1
 [Object Layer 1]
 # Spike4
 type=Spike
-location=26,30,1,1
+location=27,29,1,1
 
