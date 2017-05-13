@@ -415,6 +415,7 @@ int main(int argc, char *argv[])
     font = LoadTexture(RESOURCE_FOLDER2"font.png");
 	jumpSound = Mix_LoadWAV("jump2.wav");
     gameMusic = Mix_LoadMUS("gameMusic4.mp3");
+    Mix_Volume(-1, 40);  //lower jumpSound volume
 	projectionMatrix.setOrthoProjection(-3.55f, 3.55f, -2.0f, 2.0f, -1.0f, 1.0f);
 	glUseProgram(program->programID);
 	SDL_Event event;
