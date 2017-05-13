@@ -552,6 +552,9 @@ void Entity::Update(float elapsed) {
 		if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) { acceleration_x = 0.80f; }
 		else if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) { acceleration_x = -0.80f; }
 	}
+    if(entityType == ENEMY){
+        scale_x = mapValue(fabs(velocity_x), 0.0, 3.0, 1.0, 1.6);
+    }
 	if (velocity_x < maxMovingSpeed) { velocity_x += acceleration_x * elapsed; }
 	velocity_y += acceleration_y * elapsed;
 
