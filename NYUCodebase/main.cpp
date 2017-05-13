@@ -120,6 +120,18 @@ float lerp(float v0, float v1, float t) {
 	return (1.0f - t)*v0 + t*v1;
 }
 
+//Mapping Value Ranges
+float mapValue(float value, float srcMin, float srcMax, float dstMin, float dstMax) {
+    float retVal = dstMin + ((value - srcMin)/(srcMax-srcMin) * (dstMax-dstMin));
+    if(retVal < dstMin) {
+        retVal = dstMin;
+    }
+    if(retVal > dstMax) {
+        retVal = dstMax;
+    }
+    return retVal;
+}
+
 //SpriteSheet class, Not Needed
 class SheetSprite {
 public:
@@ -168,6 +180,8 @@ public:
 	float friction_y = 0.0f;
 	float pen_x = 0.0f;
 	float pen_y = 0.0f;
+    float scale_x = 1.0f;
+    float scale_y = 1.0f;
 
 	float index;
 	bool alive = true;
@@ -240,9 +254,10 @@ void drawMap(vector<float>& vertexData, vector<float>& texCoordData) {
 	}
 }
 
+
 //Function to render map
-void renderMap(ShaderProgram* program, vector<float>& vertexData, vector<float>& texCoordData) {
-	glUseProgram(program->programID);
+void renderMap(ShaderProgram* program, vector<float>& vertexData, vector<float>& texCoordData, float elapsed) {
+    glUseProgram(program->programID);
 	glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertexData.data());
 	glEnableVertexAttribArray(program->positionAttribute);
 	glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoordData.data());
@@ -466,7 +481,7 @@ int main(int argc, char *argv[])
 
 		case GAME_STATE:
 			//Map rendering, Fixed Elapsed time updating, Entity Updating and rendering
-			renderMap(program, vertexData, texCoordData);
+			renderMap(program, vertexData, texCoordData, fixedElapsed);
 			if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS) { fixedElapsed = FIXED_TIMESTEP * MAX_TIMESTEPS; }
 			while (fixedElapsed >= FIXED_TIMESTEP) { fixedElapsed -= FIXED_TIMESTEP; update(FIXED_TIMESTEP); }
 			update(fixedElapsed);
@@ -524,6 +539,8 @@ void Entity::Update(float elapsed) {
 	float maxMovingSpeed = 12.0f;
 	velocity_x = lerp(velocity_x, 0.0f, elapsed*friction_x);
 	velocity_y = lerp(velocity_y, 0.0f, elapsed*friction_y);
+    scale_x = mapValue(fabs(velocity_y), 10.0, 0.0, 0.8, 1.0);
+    scale_y = mapValue(fabs(velocity_y), 0.0, 10.0, 1.0, 1.6);
 	if (entityType == PLAYER) {
 		const Uint8 *keys = SDL_GetKeyboardState(NULL);
 		if ((keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) && collidedBottom == true) { 
@@ -568,6 +585,7 @@ void Entity::Render(ShaderProgram * program) {
 
 		ModelMatrix.identity();
 		ModelMatrix.Translate(x, y, 0);
+        ModelMatrix.Scale(scale_x, scale_y, 1.0f);
 		program->setModelMatrix(ModelMatrix);
 
 		glUseProgram(program->programID);
