@@ -22,15 +22,15 @@
 		6DEF23C31B96CC2600BCE792 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF23BE1B96CC2600BCE792 /* ShaderProgram.cpp */; };
 		6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6DEF23C01B96CC2600BCE792 /* vertex.glsl */; };
 		AE78F6791EA98E7900563326 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE78F6781EA98E7900563326 /* SDL2_mixer.framework */; };
-		AE8336B11EC2E671004370D5 /* dirt-tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B01EC2E671004370D5 /* dirt-tiles.png */; settings = {ASSET_TAGS = (); }; };
-		AE8336B31EC2E678004370D5 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B21EC2E678004370D5 /* font.png */; settings = {ASSET_TAGS = (); }; };
 		AE8336B51EC3AF3A004370D5 /* jump1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B41EC3AF3A004370D5 /* jump1.wav */; settings = {ASSET_TAGS = (); }; };
 		AE8336B71EC3B071004370D5 /* jump2.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE8336B61EC3B071004370D5 /* jump2.wav */; settings = {ASSET_TAGS = (); }; };
-		AE8336BD1EC63C0E004370D5 /* map1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336BC1EC63C0E004370D5 /* map1.txt */; settings = {ASSET_TAGS = (); }; };
-		AE8336BF1EC63C17004370D5 /* map2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336BE1EC63C17004370D5 /* map2.txt */; settings = {ASSET_TAGS = (); }; };
-		AE8336C11EC63C21004370D5 /* map3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336C01EC63C21004370D5 /* map3.txt */; settings = {ASSET_TAGS = (); }; };
 		AE8336C31EC6AE45004370D5 /* gameMusic3.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE8336C21EC6AE45004370D5 /* gameMusic3.wav */; settings = {ASSET_TAGS = (); }; };
 		AE8336C51EC6B174004370D5 /* gameMusic4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AE8336C41EC6B174004370D5 /* gameMusic4.mp3 */; settings = {ASSET_TAGS = (); }; };
+		AE8336C71EC6C69A004370D5 /* dirt-tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8336C61EC6C69A004370D5 /* dirt-tiles.png */; settings = {ASSET_TAGS = (); }; };
+		AE8336C91EC6C6B7004370D5 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8336C81EC6C6B7004370D5 /* font.png */; settings = {ASSET_TAGS = (); }; };
+		AE8336CB1EC6C6D2004370D5 /* map1.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336CA1EC6C6D2004370D5 /* map1.txt */; settings = {ASSET_TAGS = (); }; };
+		AE8336CD1EC6C6DF004370D5 /* map2.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336CC1EC6C6DF004370D5 /* map2.txt */; settings = {ASSET_TAGS = (); }; };
+		AE8336CF1EC6C6ED004370D5 /* map3.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE8336CE1EC6C6ED004370D5 /* map3.txt */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,15 +58,15 @@
 		6DEF23BF1B96CC2600BCE792 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
 		6DEF23C01B96CC2600BCE792 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
 		AE78F6781EA98E7900563326 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
-		AE8336B01EC2E671004370D5 /* dirt-tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirt-tiles.png"; sourceTree = "<group>"; };
-		AE8336B21EC2E678004370D5 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
 		AE8336B41EC3AF3A004370D5 /* jump1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump1.wav; sourceTree = "<group>"; };
 		AE8336B61EC3B071004370D5 /* jump2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump2.wav; sourceTree = "<group>"; };
-		AE8336BC1EC63C0E004370D5 /* map1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map1.txt; sourceTree = "<group>"; };
-		AE8336BE1EC63C17004370D5 /* map2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map2.txt; sourceTree = "<group>"; };
-		AE8336C01EC63C21004370D5 /* map3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map3.txt; sourceTree = "<group>"; };
 		AE8336C21EC6AE45004370D5 /* gameMusic3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameMusic3.wav; sourceTree = "<group>"; };
 		AE8336C41EC6B174004370D5 /* gameMusic4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameMusic4.mp3; sourceTree = "<group>"; };
+		AE8336C61EC6C69A004370D5 /* dirt-tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirt-tiles.png"; sourceTree = "<group>"; };
+		AE8336C81EC6C6B7004370D5 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
+		AE8336CA1EC6C6D2004370D5 /* map1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map1.txt; sourceTree = "<group>"; };
+		AE8336CC1EC6C6DF004370D5 /* map2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map2.txt; sourceTree = "<group>"; };
+		AE8336CE1EC6C6ED004370D5 /* map3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map3.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,18 +168,18 @@
 			children = (
 				6DEF23BB1B96CC2600BCE792 /* fragment.glsl */,
 				6DE9D2F01BA6AB8C002D599C /* fragment_textured.glsl */,
-				AE8336B01EC2E671004370D5 /* dirt-tiles.png */,
-				AE8336B21EC2E678004370D5 /* font.png */,
 				AE8336B41EC3AF3A004370D5 /* jump1.wav */,
 				AE8336B61EC3B071004370D5 /* jump2.wav */,
 				6DC707691BA7273500225B7D /* vertex_textured.glsl */,
 				6DEF23BC1B96CC2600BCE792 /* Matrix.cpp */,
 				6DEF23BD1B96CC2600BCE792 /* Matrix.h */,
+				AE8336C81EC6C6B7004370D5 /* font.png */,
+				AE8336C61EC6C69A004370D5 /* dirt-tiles.png */,
 				AE8336C41EC6B174004370D5 /* gameMusic4.mp3 */,
 				AE8336C21EC6AE45004370D5 /* gameMusic3.wav */,
-				AE8336C01EC63C21004370D5 /* map3.txt */,
-				AE8336BE1EC63C17004370D5 /* map2.txt */,
-				AE8336BC1EC63C0E004370D5 /* map1.txt */,
+				AE8336CE1EC6C6ED004370D5 /* map3.txt */,
+				AE8336CC1EC6C6DF004370D5 /* map2.txt */,
+				AE8336CA1EC6C6D2004370D5 /* map1.txt */,
 				6DEF23BE1B96CC2600BCE792 /* ShaderProgram.cpp */,
 				6DEF23BF1B96CC2600BCE792 /* ShaderProgram.h */,
 				6DEF23C01B96CC2600BCE792 /* vertex.glsl */,
@@ -242,11 +242,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE8336B71EC3B071004370D5 /* jump2.wav in Resources */,
-				AE8336BD1EC63C0E004370D5 /* map1.txt in Resources */,
+				AE8336C91EC6C6B7004370D5 /* font.png in Resources */,
+				AE8336C71EC6C69A004370D5 /* dirt-tiles.png in Resources */,
 				6D5A86B819AE5C710066C1FD /* InfoPlist.strings in Resources */,
 				6DEF23C11B96CC2600BCE792 /* fragment.glsl in Resources */,
-				AE8336B31EC2E678004370D5 /* font.png in Resources */,
-				AE8336B11EC2E671004370D5 /* dirt-tiles.png in Resources */,
+				AE8336CB1EC6C6D2004370D5 /* map1.txt in Resources */,
+				AE8336CD1EC6C6DF004370D5 /* map2.txt in Resources */,
+				AE8336CF1EC6C6ED004370D5 /* map3.txt in Resources */,
 				AE8336C31EC6AE45004370D5 /* gameMusic3.wav in Resources */,
 				6DE9D2F11BA6AB8C002D599C /* fragment_textured.glsl in Resources */,
 				6D5A86C619AE5C710066C1FD /* Images.xcassets in Resources */,
@@ -255,8 +257,6 @@
 				AE8336C51EC6B174004370D5 /* gameMusic4.mp3 in Resources */,
 				6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */,
 				6DC7076A1BA7273500225B7D /* vertex_textured.glsl in Resources */,
-				AE8336BF1EC63C17004370D5 /* map2.txt in Resources */,
-				AE8336C11EC63C21004370D5 /* map3.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

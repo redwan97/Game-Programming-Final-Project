@@ -409,8 +409,8 @@ int main(int argc, char *argv[])
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	program = new ShaderProgram(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
-    sheet = LoadTexture("dirt-tiles.png");
-    font = LoadTexture("font.png");
+    sheet = LoadTexture("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/dirt-tiles.png");
+    font = LoadTexture("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/font.png");
 	jumpSound = Mix_LoadWAV("jump2.wav");
     gameMusic = Mix_LoadMUS("gameMusic4.mp3");
 	projectionMatrix.setOrthoProjection(-3.55f, 3.55f, -2.0f, 2.0f, -1.0f, 1.0f);
@@ -433,14 +433,14 @@ int main(int argc, char *argv[])
                     if (gState == TITLE_SCREEN) {
                         Mix_PlayMusic(gameMusic, -1);
                         lState = LEVEL_1;
-                        levelInit("map2.txt", vertexData, texCoordData); } //Level 1 Initilization
+                        levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map2.txt", vertexData, texCoordData); } //Level 1 Initilization
                     else if (gState == GAME_STATE){
                         if(lState == LEVEL_1){
-                            levelInit("map1.txt", vertexData, texCoordData);
+                            levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map1.txt", vertexData, texCoordData);
                             lState = LEVEL_2;
                         }
                         else if (lState == LEVEL_2){
-                            levelInit("map3.txt", vertexData, texCoordData);
+                            levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map3.txt", vertexData, texCoordData);
                             lState = LEVEL_3;
                         }else{
                             gState = TITLE_SCREEN;
@@ -672,14 +672,14 @@ bool Entity::collidesWith(Entity * entity) {
 			if (won) {
 				lState = LEVEL_2;
 				won = false; 
-                levelInit("map1.txt", vertexData, texCoordData); //Level 2 Initilization
+                levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map1.txt", vertexData, texCoordData); //Level 2 Initilization
  			}
 		}
 		if (lState == LEVEL_2) {
 			if (won) {
 				lState = LEVEL_3;
 				won = false;
-                levelInit("map3.txt", vertexData, texCoordData); //Level 3 Initilization
+                levelInit("/Users/Laila/Desktop/FinalGameProject/Game-Programming-Final-Project/NYUCodebase/map3.txt", vertexData, texCoordData); //Level 3 Initilization
 			}
 		}
 		if (lState == LEVEL_3) {
